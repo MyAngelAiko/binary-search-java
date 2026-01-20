@@ -1,25 +1,36 @@
 import java.util.Scanner;
 public static void main(String[] args) {
-    int[] sequence = {4, 9, 23, 43, 62, 91, 100, 109, 121};
+    List<Integer> sequence = new ArrayList<Integer>();
+    Scanner firstScanner = new Scanner(System.in);
+    boolean stopLoop = false;
+    while(!stopLoop) {
+        String sequenceNumber = firstScanner.nextLine();
+        if(sequenceNumber.equals("X")) {
+            stopLoop = true;
+        }
+        else {
+            int arrayNumber = Integer.parseInt(sequenceNumber);
+            sequence.add(arrayNumber);
+        }
+    }
     Scanner userInput = new Scanner(System.in);
     String sequenceString = userInput.nextLine();
     int number = Integer.parseInt(sequenceString);
     boolean found = false;
     boolean searchComplete = false;
-    int top = sequence.length;
+    int top = sequence.size();
     int halfLength = top / 2;
-    System.out.println(halfLength);
     int bottom = -1;
     while(!found && !searchComplete) {
         if (top - bottom == 1) {
             searchComplete = true;
             System.out.println("The number is NOT in the sequence");
         }
-        else if(sequence[halfLength] > number) {
+        else if(sequence.get(halfLength) > number) {
             top = halfLength;
             halfLength = (halfLength + bottom) / 2;
         }
-        else if (sequence[halfLength] < number) {
+        else if (sequence.get(halfLength) < number) {
             bottom = halfLength;
             halfLength= (top + bottom) / 2;
         }
